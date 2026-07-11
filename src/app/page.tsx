@@ -1,65 +1,58 @@
-import Image from "next/image";
+import { FlaskConical, Sparkles, Rocket } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black text-white">
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#06b6d440,transparent_60%)]" />
+      <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-cyan-500/20 blur-3xl" />
+      <div className="absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-violet-500/20 blur-3xl" />
+
+      <div className="relative z-10 max-w-3xl px-6 text-center">
+        {/* Logo */}
+        <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur">
+          <FlaskConical className="h-10 w-10 text-cyan-400" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Badge */}
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-5 py-2 text-sm text-cyan-300">
+          <Sparkles className="h-4 w-4" />
+          Ideas → Experiments → Products
         </div>
-      </main>
-    </div>
+
+        {/* Heading */}
+        <h1 className="text-5xl font-bold tracking-tight md:text-7xl">
+          LAB
+        </h1>
+
+        <h2 className="mt-4 text-3xl font-semibold text-white/90 md:text-5xl">
+          Building Future Products
+        </h2>
+
+        {/* Description */}
+        <p className="mx-auto mt-8 max-w-xl text-lg leading-8 text-gray-400">
+          A place where ideas are tested, prototypes are built,
+          and innovative products are created.
+          Experimenting with technology to discover what comes next.
+        </p>
+
+        {/* Buttons */}
+        <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
+          <button className="flex items-center justify-center gap-2 rounded-full bg-cyan-500 px-8 py-3 font-semibold text-black transition hover:bg-cyan-400">
+            <Rocket className="h-4 w-4" />
+            Explore Projects
+          </button>
+
+          <button className="rounded-full border border-white/20 px-8 py-3 font-semibold transition hover:bg-white/10">
+            Give Feedback
+          </button>
+        </div>
+
+        {/* Footer */}
+        <p className="mt-16 text-sm uppercase tracking-[0.3em] text-gray-500">
+          Experiments • Products • Technology
+        </p>
+      </div>
+    </main>
   );
 }
