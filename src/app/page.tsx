@@ -44,7 +44,7 @@ export default function Home() {
           </button>
 
           <button className="rounded-full border border-white/20 px-8 py-3 font-semibold transition hover:bg-white/10">
-            Give Feedbacks
+            Give Feedback
           </button>
         </div>
 
