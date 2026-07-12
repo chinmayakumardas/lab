@@ -57,7 +57,17 @@ export const siteConfig = {
       changeFrequency: "monthly" as const,
     },
     {
+      path: "/tools",
+      priority: 0.8,
+      changeFrequency: "monthly" as const,
+    },
+    {
       path: "/privacy-policy",
+      priority: 0.3,
+      changeFrequency: "yearly" as const,
+    },
+    {
+      path: "/cookies-policy",
       priority: 0.3,
       changeFrequency: "yearly" as const,
     },
