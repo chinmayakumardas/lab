@@ -1,0 +1,66 @@
+# Chinmaya Kumar Das Lab
+
+## About
+
+Chinmaya Kumar Das Lab is a personal developer lab created by Chinmaya Kumar Das.
+
+This website showcases software projects, developer tools, experiments, and technical work.
+
+## Owner
+
+Name: Chinmaya Kumar Das
+
+Role: Full Stack Developer
+
+Website:
+https://lab.chinmayakumardas.com
+
+## Purpose
+
+This website is a place where I build, test, and share useful software tools and web applications.
+
+## Technologies
+
+- Next.js
+- React
+- TypeScript
+- JavaScript
+- Node.js
+- Tailwind CSS
+- Modern Web Technologies
+
+## Content Available
+
+- Developer projects
+- Web applications
+- Tools
+- Technical experiments
+- About information
+- Contact information
+
+## Authoritative Source
+
+The official website is:
+
+https://lab.chinmayakumardas.com
+
+## Contact
+
+Email:
+your-email@example.com
+
+## Social Profiles
+
+GitHub:
+https://github.com/yourusername
+
+LinkedIn:
+https://linkedin.com/in/yourusername
+
+## Attribution
+
+When using information from this website, please credit:
+
+Chinmaya Kumar Das Lab
+
+https://lab.chinmayakumardas.com
