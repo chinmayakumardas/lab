@@ -1,4 +1,4 @@
-# DevLab
+# Chinmaya.Lab
 
 A personal developer lab built with Next.js, TypeScript, and Tailwind CSS.
 
