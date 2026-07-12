@@ -144,17 +144,17 @@ const Footer = () => {
                 <p className="text-base font-medium text-foreground">Legal</p>
                 <ul className="flex flex-col gap-3">
                   <li>
-                    <Link href="/terms" className="text-base font-normal text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href="/terms-and-conditions" className="text-base font-normal text-muted-foreground hover:text-foreground transition-colors">
                       Terms & Conditions
                     </Link>
                   </li>
                   <li>
-                    <Link href="/privacy" className="text-base font-normal text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href="/privacy-policy" className="text-base font-normal text-muted-foreground hover:text-foreground transition-colors">
                       Privacy Policy
                     </Link>
                   </li>
                   <li>
-                    <Link href="/cookies" className="text-base font-normal text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href="/cookies-policy" className="text-base font-normal text-muted-foreground hover:text-foreground transition-colors">
                       Cookies Policy
                     </Link>
                   </li>
