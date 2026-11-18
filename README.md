@@ -1,39 +1,21 @@
-# Chinmaya.Lab
+# shadcn/ui monorepo template
 
-A personal developer lab built with Next.js, TypeScript, and Tailwind CSS.
+This is a Next.js monorepo template with shadcn/ui.
 
-## ✨ Features
+## Adding components
 
-- Next.js App Router
-- TypeScript
-- Tailwind CSS
-- SEO Ready
-- Responsive Design
-- Clean Folder Structure
-
-## 🚀 Getting Started
-
-Install dependencies:
+To add components to your app, run the following command at the root of your `web` app:
 
 ```bash
-npm install
+pnpm dlx shadcn@latest add button -c apps/web
 ```
 
-Run the development server:
+This will place the ui components in the `packages/ui/src/components` directory.
 
-```bash
-npm run dev
+## Using components
+
+To use the components in your app, import them from the `ui` package.
+
+```tsx
+import { Button } from "@workspace/ui/components/button";
 ```
-
-Open http://localhost:3000
-
-## 📁 Tech Stack
-
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-
-## 📄 License
-
-MIT
