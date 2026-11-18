@@ -2,9 +2,10 @@ import { Geist, Geist_Mono, Inter } from "next/font/google"
 import { TooltipProvider } from "@workspace/ui/components/tooltip"
 import "@workspace/ui/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@workspace/ui/lib/utils";
+import { ApplicationShell1 } from "@/components/application-shell1"
+import { cn } from "@workspace/ui/lib/utils"
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'})
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
@@ -24,7 +25,9 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <TooltipProvider>{children}</TooltipProvider>
+          <TooltipProvider>
+            <ApplicationShell1>{children}</ApplicationShell1>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
