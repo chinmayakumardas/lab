@@ -1,3 +1,8 @@
+
+
+
+
+
 "use client";
 
 import {
@@ -22,10 +27,10 @@ import {
 } from "lucide-react";
 import { MotionConfig, motion } from "motion/react";
 import * as React from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "cn";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -70,76 +75,66 @@ import {
 } from "@workspace/ui/components/sidebar";
 
 const person1 = {
-  name: "Jack Walsh",
-  firstName: "Jack",
-  lastName: "Walsh",
-  initials: "JW",
-  email: "jack.walsh@example.com",
-  username: "jackwalsh",
+  name: "Chinmay Kumar Das",
+  firstName: "Chinmay",
+  lastName: "Das",
+  initials: "CK",
+  email: "chinmayakumardas2000@gmail.com",
+  username: "chinmaya",
   role: "Product Designer",
-  company: "Cartwright",
-  location: "Brisbane, Australia",
-  avatar: "https://cdn.shadcnblocks.com/shadcnblocks/image-set/modern/avatars/avatar1.webp",
+  company: "AASINT",
+  location: "Bhubaneswar, India",
+  avatar:
+    "/profile-full.png",
 };
-// Base nav item - used by simple sidebars
+
 type NavItem = {
   label: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   href: string;
   isActive?: boolean;
-  // Optional children for submenus (Sidebar3+)
   children?: NavItem[];
 };
 
-// Nav group with optional collapsible state
 type NavGroup = {
   title: string;
   items: NavItem[];
-  // Optional: default collapsed state (Sidebar2+)
   defaultOpen?: boolean;
 };
 
-// User data for footer (Sidebar6+)
 type UserData = {
   name: string;
   email: string;
   avatar: string;
 };
 
-// Complete sidebar data structure
 type SidebarData = {
-  // Logo/branding (all sidebars)
   logo: {
     src: string;
     alt: string;
     title: string;
     description: string;
   };
-  // Main navigation groups (all sidebars)
   navGroups: NavGroup[];
-  // Footer navigation group (all sidebars)
   footerGroup: NavGroup;
-  // User data for user footer (Sidebar6+)
   user?: UserData;
-  // Workspaces for switcher (Sidebar7+)
   workspaces?: Array<{
     id: string;
     name: string;
     logo: string;
     plan: string;
   }>;
-  // Currently active workspace (Sidebar7+)
   activeWorkspace?: string;
 };
 
-// Shared sidebar data - works with all sidebar variations
 const sidebarData: SidebarData = {
   logo: {
     src: "https://cdn.shadcnblocks.com/shadcnblocks/block/logos/shadcnblocks-logo.svg",
-    alt: "Shadcnblocks",
-    title: "Shadcnblocks",
-    description: "Build your app",
+    alt: "Lab",
+    title: "Hey Buddy",
+  description: "Stop thinking. Start building.",
   },
+
   navGroups: [
     {
       title: "Overview",
@@ -148,11 +143,11 @@ const sidebarData: SidebarData = {
         {
           label: "Dashboard",
           icon: LayoutDashboard,
-          href: "#",
+          href: "/",
           isActive: true,
         },
-        { label: "Tasks", icon: ClipboardList, href: "#" },
-        { label: "Roadmap", icon: BarChart3, href: "#" },
+        { label: "Tasks", icon: ClipboardList, href: "/tasks" },
+        { label: "Roadmap", icon: BarChart3, href: "/roadmap" },
       ],
     },
     {
@@ -162,20 +157,20 @@ const sidebarData: SidebarData = {
         {
           label: "Active Projects",
           icon: Briefcase,
-          href: "#",
+          href: "/projects",
           children: [
-            { label: "Project Alpha", icon: FileText, href: "#" },
-            { label: "Project Beta", icon: FileText, href: "#" },
-            { label: "Project Gamma", icon: FileText, href: "#" },
+            { label: "Project Alpha", icon: FileText, href: "/projects/alpha" },
+            { label: "Project Beta", icon: FileText, href: "/projects/beta" },
+            { label: "Project Gamma", icon: FileText, href: "/projects/gamma" },
           ],
         },
         {
           label: "Archived",
           icon: Folder,
-          href: "#",
+          href: "/projects/archived",
           children: [
-            { label: "2024 Archive", icon: FileText, href: "#" },
-            { label: "2023 Archive", icon: FileText, href: "#" },
+            { label: "2024 Archive", icon: FileText, href: "/projects/archived/2024" },
+            { label: "2023 Archive", icon: FileText, href: "/projects/archived/2023" },
           ],
         },
       ],
@@ -184,33 +179,36 @@ const sidebarData: SidebarData = {
       title: "Team",
       defaultOpen: false,
       items: [
-        { label: "Members", icon: Users, href: "#" },
-        { label: "Sprints", icon: Clock3, href: "#" },
-        { label: "Approvals", icon: BadgeCheck, href: "#" },
-        { label: "Reviews", icon: Star, href: "#" },
+        { label: "Members", icon: Users, href: "/team/members" },
+        { label: "Sprints", icon: Clock3, href: "/team/sprints" },
+        { label: "Approvals", icon: BadgeCheck, href: "/team/approvals" },
+        { label: "Reviews", icon: Star, href: "/team/reviews" },
       ],
     },
     {
       title: "Workspace",
       defaultOpen: false,
       items: [
-        { label: "Integrations", icon: Globe2, href: "#" },
-        { label: "Automations", icon: Sparkles, href: "#" },
+        { label: "Integrations", icon: Globe2, href: "/integrations" },
+        { label: "Automations", icon: Sparkles, href: "/automations" },
       ],
     },
   ],
+
   footerGroup: {
     title: "Support",
     items: [
-      { label: "Help Center", icon: HelpCircle, href: "#" },
-      { label: "Settings", icon: Settings, href: "#" },
+      { label: "Help Center", icon: HelpCircle, href: "/help" },
+      { label: "Settings", icon: Settings, href: "/settings" },
     ],
   },
+
   user: {
     name: person1.name,
     email: person1.email,
     avatar: person1.avatar,
   },
+
   workspaces: [
     {
       id: "1",
@@ -231,13 +229,16 @@ const sidebarData: SidebarData = {
       plan: "Free",
     },
   ],
+
   activeWorkspace: "1",
 };
 
-const spring = { type: "spring", bounce: 0.18, duration: 0.45 } as const;
+const spring = {
+  type: "spring",
+  bounce: 0.18,
+  duration: 0.45,
+} as const;
 
-// Shared motion classes for menu buttons: press feedback and the active pill
-// rendered by ActivePill instead of the static background.
 const buttonMotion =
   "relative isolate overflow-visible transition-[width,height,padding,background-color,color,transform] duration-200 ease-out group-data-[collapsible=icon]:overflow-hidden active:scale-[0.98] data-active:bg-transparent data-active:hover:bg-sidebar-accent/60 motion-reduce:transition-none motion-reduce:active:scale-100";
 
@@ -249,52 +250,93 @@ const ActivePill = () => (
   />
 );
 
-const SidebarLogo = ({ logo }: { logo: SidebarData["logo"] }) => {
-  return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <SidebarMenuButton size="lg">
-          <div className="flex aspect-square size-8 items-center justify-center rounded-sm bg-primary">
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              className="size-6 text-primary-foreground invert dark:invert-0"
-            />
-          </div>
-          <div className="flex flex-col gap-0.5 leading-none">
-            <span className="font-medium">{logo.title}</span>
-            <span className="text-xs text-muted-foreground">
-              {logo.description}
-            </span>
-          </div>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    </SidebarMenu>
-  );
+const normalizePath = (path: string) =>
+  path.length > 1 ? path.replace(/\/+$/, "") : "/";
+
+const findTrail = (pathname: string) => {
+  const currentPath = normalizePath(pathname);
+
+  for (const group of sidebarData.navGroups) {
+    for (const item of group.items) {
+      if (normalizePath(item.href) === currentPath) {
+        return [group.title, item.label];
+      }
+
+      const child = item.children?.find(
+        (entry) => normalizePath(entry.href) === currentPath
+      );
+
+      if (child) {
+        return [group.title, item.label, child.label];
+      }
+    }
+  }
+
+  if (currentPath === "/") {
+    return ["Overview", "Dashboard"];
+  }
+
+  return currentPath
+    .split("/")
+    .filter(Boolean)
+    .map((segment) =>
+      decodeURIComponent(segment)
+        .replace(/[-_]/g, " ")
+        .replace(/\b\w/g, (char) => char.toUpperCase())
+    );
 };
+
+const SidebarLogo = ({ logo }: { logo: SidebarData["logo"] }) => (
+  <SidebarMenu>
+    <SidebarMenuItem>
+      <SidebarMenuButton size="lg">
+        <div className="flex aspect-square size-8 items-center justify-center rounded-sm bg-primary">
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            className="size-6 text-primary-foreground invert dark:invert-0"
+          />
+        </div>
+        <div className="flex flex-col gap-0.5 leading-none">
+          <span className="font-medium">{logo.title}</span>
+          <span className="text-xs text-muted-foreground">
+            {logo.description}
+          </span>
+        </div>
+      </SidebarMenuButton>
+    </SidebarMenuItem>
+  </SidebarMenu>
+);
 
 const NavMenuItem = ({
   item,
-  active,
+  pathname,
   onNavigate,
 }: {
   item: NavItem;
-  active: string;
-  onNavigate: (label: string) => void;
+  pathname: string;
+  onNavigate: (href: string) => void;
 }) => {
   const Icon = item.icon;
-  const hasChildren = item.children && item.children.length > 0;
+  const hasChildren = !!item.children?.length;
+  const currentPath = normalizePath(pathname);
 
   if (!hasChildren) {
-    const isActive = active === item.label;
+    const isActive = normalizePath(item.href) === currentPath;
+
     return (
       <SidebarMenuItem>
-        <SidebarMenuButton asChild isActive={isActive} className={buttonMotion}>
+        <SidebarMenuButton
+          asChild
+          isActive={isActive}
+          className={buttonMotion}
+        >
           <a
             href={item.href}
+            aria-current={isActive ? "page" : undefined}
             onClick={(event) => {
               event.preventDefault();
-              onNavigate(item.label);
+              onNavigate(item.href);
             }}
           >
             {isActive && <ActivePill />}
@@ -306,8 +348,18 @@ const NavMenuItem = ({
     );
   }
 
+  const childIsActive = item.children!.some(
+    (child) => normalizePath(child.href) === currentPath
+  );
+
   return (
-    <Collapsible asChild defaultOpen className="group/collapsible">
+    <Collapsible
+      asChild
+      defaultOpen={item.children!.some(
+        (child) => normalizePath(child.href) === currentPath
+      ) || item.isActive}
+      className="group/collapsible"
+    >
       <SidebarMenuItem>
         <CollapsibleTrigger asChild>
           <SidebarMenuButton className={buttonMotion}>
@@ -316,10 +368,13 @@ const NavMenuItem = ({
             <ChevronRight className="ml-auto size-4 text-muted-foreground transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group-data-[state=open]/collapsible:rotate-90 motion-reduce:transition-none" />
           </SidebarMenuButton>
         </CollapsibleTrigger>
+
         <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down motion-reduce:animate-none">
           <SidebarMenuSub>
             {item.children!.map((child, index) => {
-              const isActive = active === child.label;
+              const isActive =
+                normalizePath(child.href) === currentPath;
+
               return (
                 <SidebarMenuSubItem
                   key={child.label}
@@ -333,9 +388,10 @@ const NavMenuItem = ({
                   >
                     <a
                       href={child.href}
+                      aria-current={isActive ? "page" : undefined}
                       onClick={(event) => {
                         event.preventDefault();
-                        onNavigate(child.label);
+                        onNavigate(child.href);
                       }}
                     >
                       {isActive && <ActivePill />}
@@ -373,15 +429,18 @@ const NavUser = ({ user }: { user: UserData }) => {
                   {initials}
                 </AvatarFallback>
               </Avatar>
+
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
                 <span className="truncate text-xs text-muted-foreground">
                   {user.email}
                 </span>
               </div>
+
               <ChevronsUpDown className="ml-auto size-4 text-muted-foreground" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg duration-200"
             side="bottom"
@@ -396,6 +455,7 @@ const NavUser = ({ user }: { user: UserData }) => {
                     {initials}
                   </AvatarFallback>
                 </Avatar>
+
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
                   <span className="truncate text-xs text-muted-foreground">
@@ -404,12 +464,16 @@ const NavUser = ({ user }: { user: UserData }) => {
                 </div>
               </div>
             </DropdownMenuLabel>
+
             <DropdownMenuSeparator />
+
             <DropdownMenuItem>
               <User className="mr-2 size-4" />
               Account
             </DropdownMenuItem>
+
             <DropdownMenuSeparator />
+
             <DropdownMenuItem>
               <LogOut className="mr-2 size-4" />
               Log out
@@ -422,18 +486,19 @@ const NavUser = ({ user }: { user: UserData }) => {
 };
 
 const AppSidebar = ({
-  active,
+  pathname,
   onNavigate,
   ...props
 }: React.ComponentProps<typeof Sidebar> & {
-  active: string;
-  onNavigate: (label: string) => void;
+  pathname: string;
+  onNavigate: (href: string) => void;
 }) => {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
         <SidebarLogo logo={sidebarData.logo} />
       </SidebarHeader>
+
       <SidebarContent className="overflow-hidden">
         <ScrollArea className="min-h-0 flex-1">
           {sidebarData.navGroups.map((group, groupIndex) => (
@@ -443,13 +508,14 @@ const AppSidebar = ({
               style={{ animationDelay: `${groupIndex * 60}ms` }}
             >
               <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+
               <SidebarGroupContent>
                 <SidebarMenu>
                   {group.items.map((item) => (
                     <NavMenuItem
                       key={item.label}
                       item={item}
-                      active={active}
+                      pathname={pathname}
                       onNavigate={onNavigate}
                     />
                   ))}
@@ -459,51 +525,55 @@ const AppSidebar = ({
           ))}
         </ScrollArea>
       </SidebarContent>
+
       <SidebarFooter>
-        {sidebarData.user && <NavUser user={sidebarData.user} />}
+        {/* {sidebarData.user && <NavUser user={sidebarData.user} />} */}
       </SidebarFooter>
+
       <SidebarRail />
     </Sidebar>
   );
 };
 
-// Find the group (and parent item) of the active page for the breadcrumb
-const findTrail = (label: string) => {
-  for (const group of sidebarData.navGroups) {
-    for (const item of group.items) {
-      if (item.label === label) return [group.title, item.label];
-      const child = item.children?.find((entry) => entry.label === label);
-      if (child) return [group.title, item.label, child.label];
-    }
-  }
-  return [label];
-};
-
-const initialActive =
-  sidebarData.navGroups
-    .flatMap((group) => group.items)
-    .find((item) => item.isActive)?.label ?? "Dashboard";
-
 interface ApplicationShell1Props {
   className?: string;
+  children: React.ReactNode;
 }
 
-export function ApplicationShell1({ className }: ApplicationShell1Props) {
-  const [active, setActive] = React.useState(initialActive);
-  const trail = findTrail(active);
+export function ApplicationShell1({
+  className,
+  children,
+}: ApplicationShell1Props) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const trail = findTrail(pathname);
+
+  const handleNavigate = React.useCallback(
+    (href: string) => {
+      router.push(href);
+    },
+    [router]
+  );
 
   return (
     <MotionConfig reducedMotion="user">
       <SidebarProvider className={cn(className)}>
-        <AppSidebar active={active} onNavigate={setActive} />
+        <AppSidebar
+          pathname={pathname}
+          onNavigate={handleNavigate}
+        />
+
         <SidebarInset>
           <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />
+
             <Separator
               orientation="vertical"
               className="mx-2 hidden md:block"
             />
-            <a href="#" className="flex items-center gap-2 md:hidden">
+
+            <a href="/" className="flex items-center gap-2 md:hidden">
               <div className="flex aspect-square size-8 items-center justify-center rounded-sm bg-primary">
                 <img
                   src={sidebarData.logo.src}
@@ -511,24 +581,33 @@ export function ApplicationShell1({ className }: ApplicationShell1Props) {
                   className="size-6 text-primary-foreground invert dark:invert-0"
                 />
               </div>
-              <span className="font-semibold">{sidebarData.logo.title}</span>
+
+              <span className="font-semibold">
+                {sidebarData.logo.title}
+              </span>
             </a>
+
             <Breadcrumb className="hidden md:block">
               <BreadcrumbList>
                 {trail.map((crumb, index) => {
                   const isLast = index === trail.length - 1;
+
                   return (
                     <React.Fragment key={`${crumb}-${index}`}>
                       {index > 0 && <BreadcrumbSeparator />}
+
                       <BreadcrumbItem
-                        key={isLast ? active : crumb}
                         className="animate-in duration-300 fade-in-0 fill-mode-both slide-in-from-bottom-1 motion-reduce:animate-none"
-                        style={{ animationDelay: `${index * 50}ms` }}
+                        style={{
+                          animationDelay: `${index * 50}ms`,
+                        }}
                       >
                         {isLast ? (
                           <BreadcrumbPage>{crumb}</BreadcrumbPage>
                         ) : (
-                          <BreadcrumbLink href="#">{crumb}</BreadcrumbLink>
+                          <BreadcrumbLink href="#">
+                            {crumb}
+                          </BreadcrumbLink>
                         )}
                       </BreadcrumbItem>
                     </React.Fragment>
@@ -537,11 +616,14 @@ export function ApplicationShell1({ className }: ApplicationShell1Props) {
               </BreadcrumbList>
             </Breadcrumb>
           </header>
+
           <div className="flex flex-1 flex-col gap-4 p-4">
             <div
-              key={active}
+              key={pathname}
               className="min-h-[100vh] flex-1 animate-in rounded-xl bg-muted/50 duration-500 ease-out fade-in-0 fill-mode-both slide-in-from-bottom-2 zoom-in-[0.99] motion-reduce:animate-none md:min-h-min"
-            />
+            >
+              {children}
+            </div>
           </div>
         </SidebarInset>
       </SidebarProvider>
